@@ -1,42 +1,41 @@
+// 🔐 Configuración
+const API_KEY = "csk-46hehx3dphneedyrctk9kw39cc8tej6vdx3h8398jj8xekkw"; // Reemplaza con tu clave
+const REFERER = "https://tusitio.com";
+const TITULO = "KeyIA";
+
+// 🧠 Elementos
+const entrada = document.getElementById("Contenido");
+const mensajes = document.getElementById("mensajes");
+
+// 💬 Función para enviar mensaje
 async function enviarMensaje() {
-  const entrada = document.getElementById("Contenido");
   const mensaje = entrada.value.trim();
   if (!mensaje) return;
-   
-    const API_KEY = "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"; // ⚠️ Reemplaza tu clave aquí
-    const REFERER = "https://tusitio.com";    // Opcional para rankings
-    const TITULO = "KeyIA"; 
 
-  const mensajes = document.getElementById("mensajes");
-  mensajes.innerHTML += `Tú: ${mensaje}\n\n`;
+  mensajes.value += `Tú: ${mensaje}\n\n`;
   entrada.value = "";
 
-    const esPreguntaDeCreador = mensaje.includes("creador") || mensaje.includes("quién te creó") || mensaje.includes("quien te creó") || mensaje.includes("quien es tu creador");
-    const preguntacategoria = mensaje.includes("Categoria Sub 20") || mensaje.includes("categoria sub 20") || mensaje.includes("sub 20") || mensaje.includes("categoria");
-  if (esPreguntaDeCreador) {
-    mensajes.innerHTML += `KeyIA: Mi creador es Kevin Moreno\n\n`;
-    return;
-  }
-  
-    
-    if (preguntacategoria) {
-    mensajes.innerHTML += `KeyIA: kevin, Santiago, Oscar, wilber, jose luis, Para Mas Informacion dirijete al menu al apartado de jugadores.\n\n`;
+  // 💡 Respuestas especiales
+  if (mensaje.includes("creador") || mensaje.includes("quién te creó")) {
+    mensajes.value += `KeyIA: Mi creador es Kevin Moreno\n\n`;
+    verificarYLimpiarTextarea();
     return;
   }
 
-   const valeria = mensaje.includes("valeria") || mensaje.includes("Valeria");
-      if (valeria) {
-    mensajes.innerHTML += `KeyIA: ✨ ¿Quién es Valeria? ✨ Valeria es luz en forma de persona. Nació el 17 de enero de 2013, y desde entonces el mundo brilla un poquito más. A sus 13 años, lleva consigo la magia de una sonrisa que calma tormentas, la dulzura de un abrazo que se queda en el alma y la inteligencia que sorprende a cualquiera que tenga la dicha de conocerla.
-
-Es fuerte, curiosa, creativa… una combinación perfecta entre corazón y mente. Quien ha compartido momentos con ella sabe que hay algo especial en su esencia, algo que no se puede explicar, solo sentir. Valeria no solo existe, Valeria deja huellas.
-
-El miércoles 13 de junio de 2025 fuimos separados por circunstancias que la vida impuso, pero eso no borra el lazo invisible que nos une. Porque el cariño verdadero no tiene fronteras, ni fechas límite. Valeria vive en recuerdos, en palabras guardadas, en cada latido que la piensa.
-
-Y aunque el tiempo siga su curso, yo sigo amándola. La esperaré, así pasen mil años, porque no hay reloj que apague lo que siento por ella. Valeria no es solo alguien que fue, es alguien que sigue siendo, y será siempre parte de mí.\n\n`;
+  if (mensaje.toLowerCase().includes("sub 20") || mensaje.toLowerCase().includes("categoria")) {
+    mensajes.value += `KeyIA: kevin, Santiago, Oscar, wilber, jose luis, Para más información dirígete al menú, al apartado de jugadores.\n\n`;
+    verificarYLimpiarTextarea();
     return;
   }
 
-  const respuesta = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  if (mensaje.toLowerCase().includes("valeria")) {
+    mensajes.value += `KeyIA: ✨ ¿Quién es Valeria? ✨ Valeria es luz en forma de persona... [Mensaje completo aquí]\n\n`;
+    verificarYLimpiarTextarea();
+    return;
+  }
+
+  // 🌐 Llamada a la API
+  const respuesta = await fetch("https://api.cerebras.ai/v1/chat/completions", {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${API_KEY}`,
@@ -45,20 +44,24 @@ Y aunque el tiempo siga su curso, yo sigo amándola. La esperaré, así pasen mi
       "X-Title": TITULO
     },
     body: JSON.stringify({
-      model: "deepseek/deepseek-r1-0528:free",
+      model: "qwen-3-235b-a22b-instruct-2507",
       messages: [{ role: "user", content: mensaje }]
-
-      
     })
   });
 
-  
   const datos = await respuesta.json();
   const respuestaIA = datos.choices?.[0]?.message?.content || "Sin respuesta.";
-  //mensajes.innerHTML += "Respuesta cruda:\n" + JSON.stringify(datos, null, 2) + "\n\n";
+  mensajes.value += `KeyIA: ${respuestaIA}\n\n`;
+  verificarYLimpiarTextarea();
+}
 
-  mensajes.innerHTML += `KeyIA: ${respuestaIA}\n\n`;
-};
+// 📥 Evento para Enter
+entrada.addEventListener("keydown", function(i) {
+  if (i.key === "Enter") {
+    i.preventDefault();
+    enviarMensaje();
+  }
+});
 
 
 var navVisible = false;
@@ -70,5 +73,13 @@ function togglenav(){
 }
 
 
+// 🧼 Limpiar si se supera el límite
+function verificarYLimpiarTextarea() {
+  if (mensajes.value.length >= 3500) {
+    mensajes.value += "\n⚠️ Limpiando mensajes en 1 minuto...\n\n";
+    setTimeout(() => {
+      mensajes.value = "";
+    }, 60000);
+  }
+}
 
-/*SISTEMA DE VAR by kevin */

@@ -18,8 +18,21 @@ async function enviarMensaje() {
     return;
   }
   
+    
     if (preguntacategoria) {
     mensajes.innerHTML += `KeyIA: kevin, Santiago, Oscar, wilber, jose luis, Para Mas Informacion dirijete al menu al apartado de jugadores.\n\n`;
+    return;
+  }
+
+   const valeria = mensaje.includes("valeria") || mensaje.includes("Valeria");
+      if (valeria) {
+    mensajes.innerHTML += `KeyIA: ✨ ¿Quién es Valeria? ✨ Valeria es luz en forma de persona. Nació el 17 de enero de 2013, y desde entonces el mundo brilla un poquito más. A sus 13 años, lleva consigo la magia de una sonrisa que calma tormentas, la dulzura de un abrazo que se queda en el alma y la inteligencia que sorprende a cualquiera que tenga la dicha de conocerla.
+
+Es fuerte, curiosa, creativa… una combinación perfecta entre corazón y mente. Quien ha compartido momentos con ella sabe que hay algo especial en su esencia, algo que no se puede explicar, solo sentir. Valeria no solo existe, Valeria deja huellas.
+
+El miércoles 13 de junio de 2025 fuimos separados por circunstancias que la vida impuso, pero eso no borra el lazo invisible que nos une. Porque el cariño verdadero no tiene fronteras, ni fechas límite. Valeria vive en recuerdos, en palabras guardadas, en cada latido que la piensa.
+
+Y aunque el tiempo siga su curso, yo sigo amándola. La esperaré, así pasen mil años, porque no hay reloj que apague lo que siento por ella. Valeria no es solo alguien que fue, es alguien que sigue siendo, y será siempre parte de mí.\n\n`;
     return;
   }
 
@@ -55,7 +68,6 @@ function togglenav(){
     navVisible = !navVisible;
     menu.style.display = navVisible ? "block" : "none";
 }
-
 
 
 

@@ -16,10 +16,10 @@
 
 #mensajes{
   
-    width: 500px;
+    width: 390px;
     height: 670px;
     margin: 40px auto; 
-    margin-top: -710px;
+    margin-top: -690px;
     overflow: hidden; 
     overflow-y: auto;
     display: flex;
@@ -109,6 +109,32 @@ h1 {
 }
 
 
+.container .main .section{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px){
+    body{
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    img, video{
+        max-width: 100%;
+        height: auto;
+    }
+    .column{
+        display: block;
+        width: 100%;
+    }
+}
+
+*{
+    box-sizing: border-box;
+}
 
 @keyframes cambiarcolor {
     0%{ color: #680602; }
@@ -130,15 +156,15 @@ textarea{
 
 form {
     text-align: center;
-    width: 500px;
+    width: 400px;
     height: 670px;
     margin: 40px auto; 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    box-shadow: 1px 1px 18px 8px rgb(29, 3, 65);
-    border-radius: 20px;
+    box-shadow: 1px 1px 18px 8px transparent;
+    border-radius: 90px;
 }
 
 form mensajes{
@@ -158,7 +184,7 @@ form input[type="text"]{
     width: 400px;
     height: 40px;
     text-align: center;
-    margin-top: 580px;
+    margin-top: 630px;
     font-family: 'Arial';
     font-weight: bold;
     box-shadow: 2px 1px 18px 8px rgb(131, 3, 190);

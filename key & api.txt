@@ -1,0 +1,16 @@
+key 
+
+sk-or-v1-414f06ed15uyvefmcd2DkAeM9PLPWKtcPjpxQzc26CxTtPFuQMNfm2RfEHfKfaa4
+
+
+
+api
+
+
+
+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
+
+
+posible solucion
+
+<div id="mensajes" class="chat" style="height: 100px; margin-top: -600px; margin-left: 100px; color: blue;"></div>
